@@ -1,12 +1,13 @@
 openapi: 3.0.1
 info:
   title: STD21010
-  description: Hello World !
+  description: Global description
   version: 1.0.0
 servers:
 - url: https://STD21010.com
 tags :
   - name : Students
+  - name : Courses
 paths:
   /students :
     get:
@@ -14,7 +15,7 @@ paths:
       - Students
       summary: Get all students
       description: Get all students with details
-      operationId: find Student ById
+      operationId: find student ById
       responses:
         200:
           description: List of students
@@ -33,7 +34,7 @@ paths:
       - Students
       summary: Create new  students
       description: create new student from a array
-      operationId: addStudent
+      operationId: add student
       requestBody:
         description: Students to be created
         content:
@@ -61,7 +62,7 @@ paths:
       - Students
       summary: Update existing student
       description: Update student
-      operationId: putStudent
+      operationId: put student
       requestBody:
         description: Students to be created
         content:
@@ -88,7 +89,7 @@ paths:
       - Students
       summary: Update existing student
       description: Update student
-      operationId: patchStudent
+      operationId: patch student
       requestBody:
         description: Students to be updated
         content:
@@ -115,8 +116,8 @@ paths:
     get:
       tags:
       - Students
-      summary: Get student by id
-      operationId: get Student ById
+      summary: Get student by identifier
+      operationId: get student ById
       parameters:
       - name: id
         in: path
@@ -139,8 +140,8 @@ paths:
     delete:
       tags:
       - Students
-      summary: Delete student by identifier
-      operationId: delete Student ById
+      summary: Delete student by id
+      operationId: delete student ById
       parameters:
       - name: id
         in: path
@@ -150,120 +151,120 @@ paths:
           type: string
       responses:
         200:
-          description: ressource deleted
+          description: delete
           content: {}
         400:
           description: Bad Request
           content: {}
-  /elements :
+  /courses :
     get:
       tags:
-      - Elements
-      summary: Get all elements
-      description: Get all elements with details
-      operationId: find AllElement Elements
+      - Courses
+      summary: Get all courses
+      description: Get all courses with details
+      operationId: find all courses
       responses:
         200:
-          description: List of elements
+          description: List of courses
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Element'
+                  $ref: '#/components/schemas/Course'
         400:
           description: Bad Request
           content: {}
           
     post:
       tags:
-      - Elements
-      summary: Create new elements
-      description: create new elements from a array
-      operationId: addElement
+      - Courses
+      summary: Create new courses
+      description: create new courses from a array
+      operationId: add course
       requestBody:
-        description: Element to be created
+        description: Courses to be created
         content:
           application/json:
             schema:
               type : array
               items :
-                $ref: '#/components/schemas/CreateElement'
+                $ref: '#/components/schemas/CreateCourse'
         required: true
       responses:
         200:
-          description: List of Elements
+          description: List of Courses
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Element'
+                  $ref: '#/components/schemas/Course'
         400:
           description: Bad Request
           content: {}
      
     put:
       tags:
-      - Elements
-      summary: Update existing elements
-      description: update elements
-      operationId: putElement
+      - Courses
+      summary: Update existing courses
+      description: update courses
+      operationId: putCourse
       requestBody:
-        description: Elements to be updated
+        description: Courses to be updated
         content:
           application/json:
             schema:
               type : array
               items :
-                $ref: '#/components/schemas/Element'
+                $ref: '#/components/schemas/Course'
         required: true
       responses:
         200:
-          description: element updated
+          description: courses updated
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Element'
+                  $ref: '#/components/schemas/Course'
         400:
           description: Bad Request
           content: {}
     patch:
       tags:
-      - Elements
-      summary: Update existing element
-      description: update information
-      operationId: patchElement
+      - Courses
+      summary: Update existing courses
+      description: update information about course
+      operationId: patchCourse
       requestBody:
-        description: Elements to be updated
+        description: Courses to be updated
         content:
           application/json:
             schema:
               type : array
               items :
-                $ref: '#/components/schemas/Element'
+                $ref: '#/components/schemas/Course'
         required: true
       responses:
         200:
-          description: Element updated
+          description: Course updated
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Element'
+                  $ref: '#/components/schemas/Course'
         400:
           description: Bad Request
           content: {}
           
-  /element/{id}:
+  /courses/{id}:
     get:
       tags:
-      - Element
-      summary: Get element by identifier
-      operationId: get element ById
+      - Courses
+      summary: Get course by id
+      operationId: get course ById
       parameters:
       - name: id
         in: path
@@ -273,21 +274,21 @@ paths:
           type: string
       responses:
         200:
-          description: details
+          description: course with details
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Element'
+                  $ref: '#/components/schemas/Course'
         400:
           description: Bad Request
           content: {}
     delete:
       tags:
-      - Element
-      summary: Delete element by id
-      operationId: delete element ById
+      - Courses
+      summary: Delete course by id
+      operationId: delete course ById
       parameters:
       - name: id
         in: path
@@ -297,7 +298,7 @@ paths:
           type: string
       responses:
         200:
-          description: ressource deleted
+          description: delete
           content: {}
         400:
           description: Bad Request
@@ -305,15 +306,33 @@ paths:
 components:
   schemas:
     CreateStudent:
+      allOf:
+        - $ref: '#/components/schemas/PhoneNumber'
       type: object
       properties:
-        name :
+        id:
+          type: integer
+          example: 1
+        name:
           type: string
-          example: Jonathan
-        date_birth :
+          example: "Jonathan"
+        birth_date:
           type: string
           format: date
-          example: "15-07-2022"
+          example: "2001-08-05"
+        adress: 
+          type: string
+          example: "Ivandry"
+
+    PhoneNumber:
+      type: object
+      properties:
+        country-code:
+          type: string
+          example: "101"
+        number:
+          type: string
+          example: "0341872429"      
         
     Student:
       type: object
@@ -331,17 +350,17 @@ components:
       properties:
         code:
           type: string
-          example: PROG2
+          example: PROG1
         name:
           type: string
-          example: JAVA
+          example: Algorithmique
         teacher:
           type: string
-          example: Tokimahery
+          example: Tokimahery RAMAROZAKA
         createdDate:
           type: string
           format: date
-          example: "15-07-2022"
+          example: "20-07-2022"
           
     Course:
       type: object
@@ -351,5 +370,5 @@ components:
           format: int64
           example: 1
       allOf:
-          - $ref : '#/components/schemas/CreateElement' 
+          - $ref : '#/components/schemas/CreateCourse' 
  
