@@ -1,0 +1,355 @@
+openapi: 3.0.1
+info:
+  title: STD21010
+  description: Hello World !
+  version: 1.0.0
+servers:
+- url: https://STD21010.com
+tags :
+  - name : Students
+paths:
+  /students :
+    get:
+      tags:
+      - Students
+      summary: Get all students
+      description: Get all students with details
+      operationId: find Student ById
+      responses:
+        200:
+          description: List of students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+        400:
+          description: Bad Request
+          content: {}
+          
+    post:
+      tags:
+      - Students
+      summary: Create new  students
+      description: create new student from a array
+      operationId: addStudent
+      requestBody:
+        description: Students to be created
+        content:
+          application/json:
+            schema:
+              type : array
+              items :
+                $ref: '#/components/schemas/CreateStudent'
+        required: true
+      responses:
+        200:
+          description: List of students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+        400:
+          description: Bad Request
+          content: {}
+     
+    put:
+      tags:
+      - Students
+      summary: Update existing student
+      description: Update student
+      operationId: putStudent
+      requestBody:
+        description: Students to be created
+        content:
+          application/json:
+            schema:
+              type : array
+              items :
+                $ref: '#/components/schemas/Student'
+        required: true
+      responses:
+        200:
+          description: student updated
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+        400:
+          description: Bad Request
+          content: {}
+    patch:
+      tags:
+      - Students
+      summary: Update existing student
+      description: Update student
+      operationId: patchStudent
+      requestBody:
+        description: Students to be updated
+        content:
+          application/json:
+            schema:
+              type : array
+              items :
+                $ref: '#/components/schemas/Student'
+        required: true
+      responses:
+        200:
+          description: student updated
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+        400:
+          description: Bad Request
+          content: {}
+          
+  /students/{id}:
+    get:
+      tags:
+      - Students
+      summary: Get student by id
+      operationId: get Student ById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        explode : true
+        schema:
+          type: string
+      responses:
+        200:
+          description: student updated
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+        400:
+          description: Bad Request
+          content: {}
+    delete:
+      tags:
+      - Students
+      summary: Delete student by identifier
+      operationId: delete Student ById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        explode : true
+        schema:
+          type: string
+      responses:
+        200:
+          description: ressource deleted
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+  /elements :
+    get:
+      tags:
+      - Elements
+      summary: Get all elements
+      description: Get all elements with details
+      operationId: find AllElement Elements
+      responses:
+        200:
+          description: List of elements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Element'
+        400:
+          description: Bad Request
+          content: {}
+          
+    post:
+      tags:
+      - Elements
+      summary: Create new elements
+      description: create new elements from a array
+      operationId: addElement
+      requestBody:
+        description: Element to be created
+        content:
+          application/json:
+            schema:
+              type : array
+              items :
+                $ref: '#/components/schemas/CreateElement'
+        required: true
+      responses:
+        200:
+          description: List of Elements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Element'
+        400:
+          description: Bad Request
+          content: {}
+     
+    put:
+      tags:
+      - Elements
+      summary: Update existing elements
+      description: update elements
+      operationId: putElement
+      requestBody:
+        description: Elements to be updated
+        content:
+          application/json:
+            schema:
+              type : array
+              items :
+                $ref: '#/components/schemas/Element'
+        required: true
+      responses:
+        200:
+          description: element updated
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Element'
+        400:
+          description: Bad Request
+          content: {}
+    patch:
+      tags:
+      - Elements
+      summary: Update existing element
+      description: update information
+      operationId: patchElement
+      requestBody:
+        description: Elements to be updated
+        content:
+          application/json:
+            schema:
+              type : array
+              items :
+                $ref: '#/components/schemas/Element'
+        required: true
+      responses:
+        200:
+          description: Element updated
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Element'
+        400:
+          description: Bad Request
+          content: {}
+          
+  /element/{id}:
+    get:
+      tags:
+      - Element
+      summary: Get element by identifier
+      operationId: get element ById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        explode : true
+        schema:
+          type: string
+      responses:
+        200:
+          description: details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Element'
+        400:
+          description: Bad Request
+          content: {}
+    delete:
+      tags:
+      - Element
+      summary: Delete element by id
+      operationId: delete element ById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        explode : true
+        schema:
+          type: string
+      responses:
+        200:
+          description: ressource deleted
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+components:
+  schemas:
+    CreateStudent:
+      type: object
+      properties:
+        name :
+          type: string
+          example: Jonathan
+        date_birth :
+          type: string
+          format: date
+          example: "15-07-2022"
+        
+    Student:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+      allOf:
+          - $ref : '#/components/schemas/CreateStudent'
+        
+      xml:
+        name: Student
+    CreateCourse:
+      type: object
+      properties:
+        code:
+          type: string
+          example: PROG2
+        name:
+          type: string
+          example: JAVA
+        teacher:
+          type: string
+          example: Tokimahery
+        createdDate:
+          type: string
+          format: date
+          example: "15-07-2022"
+          
+    Course:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+      allOf:
+          - $ref : '#/components/schemas/CreateElement' 
+ 
